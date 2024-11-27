@@ -1,20 +1,45 @@
 import { createTheme } from '@mui/material/styles';
 
+declare module '@mui/material/styles' {
+  interface Palette {
+    custom: {
+      darkRed: string;
+      offWhite: string;
+      lightGray: string;
+      darkGray: string;
+    };
+  }
+  interface PaletteOptions {
+    custom: {
+      darkRed: string;
+      offWhite: string;
+      lightGray: string;
+      darkGray: string;
+    };
+  }
+}
+
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#1976d2',
-      light: '#42a5f5',
-      dark: '#1565c0',
+      main: '#9B403D',
+      light: '#B85D5A',
+      dark: '#7A3230',
     },
     secondary: {
-      main: '#9c27b0',
-      light: '#ba68c8',
-      dark: '#7b1fa2',
+      main: '#313131',
+      light: '#4A4A4A',
+      dark: '#242424',
     },
     background: {
-      default: '#f5f5f5',
-      paper: '#ffffff',
+      default: '#FBFAFA',
+      paper: '#FFFFFF',
+    },
+    custom: {
+      darkRed: '#9B403D',
+      offWhite: '#FBFAFA',
+      lightGray: '#DDD6CC',
+      darkGray: '#313131',
     },
   },
   typography: {
@@ -30,14 +55,17 @@ const theme = createTheme({
     h1: {
       fontSize: '2.5rem',
       fontWeight: 600,
+      color: '#313131',
     },
     h2: {
       fontSize: '2rem',
       fontWeight: 600,
+      color: '#313131',
     },
     h3: {
       fontSize: '1.75rem',
       fontWeight: 600,
+      color: '#313131',
     },
   },
   components: {
@@ -47,13 +75,36 @@ const theme = createTheme({
           textTransform: 'none',
           borderRadius: 8,
         },
+        contained: {
+          backgroundColor: '#9B403D',
+          color: '#FBFAFA',
+          '&:hover': {
+            backgroundColor: '#7A3230',
+          },
+        },
+        outlined: {
+          borderColor: '#9B403D',
+          color: '#9B403D',
+          '&:hover': {
+            borderColor: '#7A3230',
+            color: '#7A3230',
+          },
+        },
       },
     },
-    MuiCard: {
+    MuiPaper: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+          backgroundColor: '#FBFAFA',
+        },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#FBFAFA',
+          color: '#313131',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.12)',
         },
       },
     },

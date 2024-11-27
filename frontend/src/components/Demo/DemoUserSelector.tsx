@@ -28,11 +28,11 @@ const DemoUserSelector = ({ open, onClose }: DemoUserSelectorProps) => {
   const getIcon = (role: string) => {
     switch (role) {
       case 'admin':
-        return <AdminPanelSettings sx={{ fontSize: 40 }} />;
+        return <AdminPanelSettings sx={{ fontSize: 40, color: 'custom.darkRed' }} />;
       case 'school':
-        return <School sx={{ fontSize: 40 }} />;
+        return <School sx={{ fontSize: 40, color: 'custom.darkRed' }} />;
       default:
-        return <Person sx={{ fontSize: 40 }} />;
+        return <Person sx={{ fontSize: 40, color: 'custom.darkRed' }} />;
     }
   };
 
@@ -40,93 +40,103 @@ const DemoUserSelector = ({ open, onClose }: DemoUserSelectorProps) => {
     try {
       setIsDemoMode(true);
       setDemoUser(user);
-      // Simulate login
       await login(user.email, 'demo-password');
       
-      // Navigate based on role
       switch (user.role) {
         case 'admin':
           navigate('/admin');
           break;
         case 'educator':
+          navigate('/dashboard');
+          break;
         case 'school':
-          navigate('/app');
+          navigate('/school');
           break;
       }
-      onClose();
     } catch (error) {
       console.error('Demo login failed:', error);
     }
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>
-        <Typography variant="h4" align="center" gutterBottom>
-          Select a Demo User
-        </Typography>
-        <Typography variant="body1" align="center" color="text.secondary">
-          Experience THE PASS from different perspectives
-        </Typography>
+    <Dialog 
+      open={open} 
+      onClose={onClose}
+      maxWidth="md"
+      fullWidth
+      PaperProps={{
+        sx: {
+          bgcolor: 'background.default',
+          borderRadius: 2,
+        },
+      }}
+    >
+      <DialogTitle sx={{ 
+        textAlign: 'center', 
+        color: 'custom.darkGray',
+        fontSize: '1.75rem',
+        fontWeight: 600,
+        pt: 4,
+      }}>
+        Select a Demo User
       </DialogTitle>
       <DialogContent>
-        <Grid container spacing={3} sx={{ mt: 1 }}>
+        <Grid container spacing={3} sx={{ mt: 1, pb: 4 }}>
           {demoUsers.map((user) => (
             <Grid item xs={12} md={4} key={user.id}>
               <Card
                 sx={{
                   height: '100%',
-                  display: 'flex',
-                  flexDirection: 'column',
                   cursor: 'pointer',
+                  transition: 'transform 0.2s',
                   '&:hover': {
-                    boxShadow: 6,
+                    transform: 'translateY(-4px)',
                   },
+                  bgcolor: 'background.paper',
+                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
                 }}
                 onClick={() => handleSelectUser(user)}
               >
-                <CardContent>
-                  <Box
+                <CardContent sx={{ textAlign: 'center' }}>
+                  <Avatar
                     sx={{
-                      display: 'flex',
-                      flexDirection: 'column',
-                      alignItems: 'center',
-                      mb: 2,
+                      width: 64,
+                      height: 64,
+                      margin: '0 auto 16px',
+                      bgcolor: 'custom.darkRed',
                     }}
                   >
-                    <Avatar
-                      sx={{
-                        width: 80,
-                        height: 80,
-                        mb: 2,
-                        bgcolor: 'primary.main',
-                      }}
-                    >
-                      {getIcon(user.role)}
-                    </Avatar>
-                    <Typography variant="h6" gutterBottom>
-                      {user.name}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      color="primary"
-                      gutterBottom
-                      sx={{ textTransform: 'capitalize' }}
-                    >
-                      {user.role}
-                    </Typography>
-                  </Box>
-                  <Typography variant="body2" color="text.secondary">
+                    {getIcon(user.role)}
+                  </Avatar>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      mb: 1,
+                      color: 'custom.darkGray',
+                      fontWeight: 600,
+                    }}
+                  >
+                    {user.firstName} {user.lastName}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      mb: 2,
+                      color: 'custom.darkRed',
+                      fontWeight: 500,
+                    }}
+                  >
+                    {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'custom.darkGray',
+                      opacity: 0.8,
+                    }}
+                  >
                     {user.description}
                   </Typography>
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    sx={{ mt: 2 }}
-                    onClick={() => handleSelectUser(user)}
-                  >
-                    Try {user.role} Demo
-                  </Button>
                 </CardContent>
               </Card>
             </Grid>
