@@ -1,6 +1,6 @@
 # THE PASS
 
-A modern web platform connecting educational professionals with schools in Oregon.
+A modern web platform connecting educational professionals with schools.
 
 ## System Architecture
 
