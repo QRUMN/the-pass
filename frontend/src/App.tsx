@@ -3,6 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
+import { DemoProvider } from './contexts/DemoContext';
 import AppRoutes from './routes';
 import theme from './theme';
 
@@ -14,9 +15,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <AuthProvider>
-          <Router>
-            <AppRoutes />
-          </Router>
+          <DemoProvider>
+            <Router>
+              <AppRoutes />
+            </Router>
+          </DemoProvider>
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>
