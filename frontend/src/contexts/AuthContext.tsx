@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { demoUsers } from './DemoContext';
 
 export interface User {
   id: string;
@@ -54,7 +55,22 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = useCallback(async (email: string, password: string) => {
     try {
-      // TODO: Implement actual login logic with backend
+      // Check if it's a demo user
+      const demoUser = demoUsers.find(user => user.email === email);
+      if (demoUser && password === 'demo-password') {
+        const user: User = {
+          id: demoUser.id,
+          email: demoUser.email,
+          firstName: demoUser.firstName,
+          lastName: demoUser.lastName,
+          role: demoUser.role,
+        };
+        setUser(user);
+        localStorage.setItem('token', 'demo-token');
+        return;
+      }
+
+      // If not a demo user, proceed with actual login
       const response = await fetch('http://localhost:3000/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

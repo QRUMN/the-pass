@@ -3,7 +3,8 @@ import React, { createContext, useContext, useState } from 'react';
 interface DemoUser {
   id: string;
   email: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   role: 'admin' | 'educator' | 'school';
   avatar?: string;
   description: string;
@@ -22,21 +23,24 @@ export const demoUsers: DemoUser[] = [
   {
     id: 'demo-admin',
     email: 'admin@thepass.com',
-    name: 'Admin Demo',
+    firstName: 'Admin',
+    lastName: 'Demo',
     role: 'admin',
     description: 'System administrator with full access to manage users, settings, and monitor platform activity.',
   },
   {
     id: 'demo-educator',
     email: 'educator@thepass.com',
-    name: 'Sarah Johnson',
+    firstName: 'Sarah',
+    lastName: 'Johnson',
     role: 'educator',
     description: 'Experienced math teacher with 5+ years of experience, seeking new opportunities.',
   },
   {
     id: 'demo-school',
     email: 'school@thepass.com',
-    name: 'Lincoln High School',
+    firstName: 'Lincoln',
+    lastName: 'High School',
     role: 'school',
     description: 'Public high school looking for qualified educators to join our growing team.',
   },
