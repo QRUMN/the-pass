@@ -31,10 +31,11 @@ import {
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
+import { Outlet } from 'react-router-dom';
 
 const drawerWidth = 240;
 
-const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const MainLayout: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -281,7 +282,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         }}
       >
         <Toolbar />
-        {children}
+        <Outlet />
       </Box>
     </Box>
   );

@@ -6,9 +6,7 @@ import {
   Card,
   CardContent,
   Typography,
-  Button,
   Avatar,
-  Box,
 } from '@mui/material';
 import { AdminPanelSettings, School, Person } from '@mui/icons-material';
 import { useDemo, demoUsers } from '../../contexts/DemoContext';
